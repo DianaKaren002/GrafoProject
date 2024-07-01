@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AristasLista.cs" />
+    <Compile Include="GrafoLibros.cs" />
     <Compile Include="Libro.cs" />
     <Compile Include="Vertice.cs" />
     <Compile Include="VerticesLista.cs" />

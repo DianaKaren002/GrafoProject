@@ -21,7 +21,7 @@ namespace ClassPartesGrafo
             return ListaEnlaces.InsertaObjeto(numVertices, costo2);
         }
 
-        public string[] MustraAristas()
+        public string[] MuestraAristas()
         {
             return ListaEnlaces.MostrarColeccion();
         }
