@@ -8,7 +8,7 @@ namespace ClassPartesGrafo
 {
     public class GrafoLibros
     {
-        private List<Vertice> ListaAdyacente = new List<Vertice>();
+        public List<Vertice> ListaAdyacente = new List<Vertice>();
 
         public string AgregarVerice(Libro detLibro)
         {

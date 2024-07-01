@@ -13,7 +13,7 @@ namespace ClassPartesGrafo
         public string Editorial { get; set; }
         public string Autor { get; set; }
         public string Genero { get; set; }
-        public float Precio { get; set; }
+        public double Precio { get; set; }
 
         public Libro() { }
         public Libro(int idLibro,string titulo, string editorial, string autor,string genero, float precio)
