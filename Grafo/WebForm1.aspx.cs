@@ -69,5 +69,49 @@ namespace Grafo
                 lblMensaje.Text = "Error al agregar el vértice: " + ex.Message;
             }
         }
+
+        protected void btnDFS_Click(object sender, EventArgs e)
+        {
+            int vert = Convert.ToInt16(txtSelectVertice.Text);
+            List<string> resultadoDFS = grafo1.DFS(vert); // empieza desde vertice 0
+            DropDownResultado.Items.Clear();
+            foreach (var libro in resultadoDFS)
+            {
+                DropDownResultado.Items.Add(libro);
+            }
+        }
+
+        protected void btnMostrarVertices_Click(object sender, EventArgs e)
+        {
+            string[] vertx = null;
+            vertx = grafo1.MostrarVertices();
+            DropDownMostrarVertices.Items.Clear();
+            foreach (string s in vertx)
+            {
+                DropDownMostrarVertices.Items.Add(s);
+            }
+
+        }
+
+        protected void btnBFS_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int vert = Convert.ToInt16(txtSelectVertice.Text);
+                List<string> resultadoBFS = grafo1.BFS(vert); // Empieza desde el vértice 0
+                foreach (var libro in resultadoBFS)
+                {
+                    DropDownResultado.Items.Add(libro);
+                }
+            }
+            catch (FormatException ex)
+            {
+                lblMensaje.Text = "Error: Ingrese un número válido para el vértice.";
+            }
+            catch (Exception ex)
+            {
+                lblMensaje.Text=$"Error: {ex.Message}";
+            }
+        }
     }
 }

@@ -16,25 +16,18 @@ namespace ClassPartesGrafo
             return "Nuevo libro creado";
         }
 
-        public string AgregarArista (int verticeOrig, int verticeDest, float costo3)
+        public string AgregarArista(int verticeOrig, int verticeDest, float costo3)
         {
             string msj = "";
-            if(verticeOrig>=0 && verticeOrig <= (ListaAdyacente.Count - 1))
+            if (verticeOrig >= 0 && verticeOrig < ListaAdyacente.Count &&
+                verticeDest >= 0 && verticeDest < ListaAdyacente.Count)
             {
-                if(verticeDest >=0 && verticeDest <= (ListaAdyacente.Count - 1))
-                {
-                    ListaAdyacente[verticeOrig].AgregarArista(verticeDest, costo3);
-                    msj = "Arista agregada";
-                }
-                else
-                {
-                    msj = "la posicion del vertice destino no existe en la lista adyacente";
-                }
-               
+                ListaAdyacente[verticeOrig].AgregarArista(verticeDest, costo3);
+                msj = "Arista agregada";
             }
             else
             {
-                msj = "la posicion del vertice origen no existe en la lista adyacente";
+                msj = "La posición del vértice origen o destino no existe en la lista adyacente";
             }
             return msj;
         }
@@ -42,13 +35,13 @@ namespace ClassPartesGrafo
         public string[] MostrarAristasVertice(int PosicionVert, ref string msj)
         {
             string[] salida = null;
-            if(PosicionVert >= 0 && PosicionVert <= (ListaAdyacente.Count - 1))
+            if (PosicionVert >= 0 && PosicionVert < ListaAdyacente.Count)
             {
                 salida = ListaAdyacente[PosicionVert].MuestraAristas();
             }
             else
             {
-                msj = "La posicoon del vertice no existe en la lista de adyacencia";
+                msj = "La posición del vértice no existe en la lista de adyacencia";
             }
             return salida;
         }
@@ -64,7 +57,7 @@ namespace ClassPartesGrafo
                 while (temp != null)
                 {
                     salida.Add($"vertice destino =" +
-                        $"{ListaAdyacente[temp.NumVertice].detalles.Titulo}" +
+                        $"{ListaAdyacente[temp.NumVertice].detalles.IdLibro}" +
                         $" posicion enlace a:[ {temp.NumVertice}]" +
                         $"costo: {temp.costo}");
                     temp = temp.siguiente;
@@ -88,5 +81,64 @@ namespace ClassPartesGrafo
             }
             return cads;
         }
+
+        //recorrido en profundidad
+        public List<string> DFS(int verticeInicial)
+        {
+            List<string> resultado = new List<string>();
+            bool[] visitado = new bool[ListaAdyacente.Count];
+            DFSUtil(verticeInicial, visitado, resultado);
+            return resultado;
+        }
+
+        private void DFSUtil(int vertice, bool[] visitado, List<string> resultado)
+        {
+            visitado[vertice] = true;
+            resultado.Add($"Vertice actual: {ListaAdyacente[vertice].DetallesLibro()}");
+
+            VerticesLista temp = ListaAdyacente[vertice].ListaEnlaces.inicio;
+            while (temp != null)
+            {
+                if (!visitado[temp.NumVertice])
+                {
+                    DFSUtil(temp.NumVertice, visitado, resultado);
+                }
+                temp = temp.siguiente;
+            }
+        }
+
+
+        //recorrido en amplitud
+        public List<string> BFS(int verticeInicial)
+        {
+            List<string> resultado = new List<string>();
+            bool[] visitado = new bool[ListaAdyacente.Count];
+            Queue<int> cola = new Queue<int>();
+
+            visitado[verticeInicial] = true;
+            cola.Enqueue(verticeInicial);
+
+            while (cola.Count != 0)
+            {
+                int vertice = cola.Dequeue();
+                resultado.Add(ListaAdyacente[vertice].DetallesLibro());
+
+                VerticesLista temp = ListaAdyacente[vertice].ListaEnlaces.inicio;
+                while (temp != null)
+                {
+                    if (!visitado[temp.NumVertice])
+                    {
+                        visitado[temp.NumVertice] = true;
+                        cola.Enqueue(temp.NumVertice);
+                    }
+                    temp = temp.siguiente;
+                }
+            }
+
+            return resultado;
+        }
+
+
+
     }
 }
