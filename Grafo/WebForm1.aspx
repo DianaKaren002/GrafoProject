@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link href="CSS/EstilosGrafo.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -40,6 +41,8 @@
                 <asp:DropDownList ID="DropDownResultado" runat="server" Width="250px"></asp:DropDownList>
             </div>
             <div>&nbsp;</div>
+            <asp:Button ID="btnDibujarGrafo" runat="server" Text="Dibujar Grafo" OnClick="btnDibujarGrafo_Click" />
+            <asp:Panel ID="PanelGrafo" runat="server" CssClass="grafo-container"></asp:Panel>
             <div>&nbsp;</div>
             <div>&nbsp;</div>
         </div>

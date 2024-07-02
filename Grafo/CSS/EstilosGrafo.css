@@ -1,0 +1,19 @@
+﻿.grafo-container {
+    width: 600px; /* Ancho del contenedor */
+    height: 600px; /* Altura del contenedor */
+    position: relative;
+    border: 1px solid #ccc;
+    margin: 20px auto; /* Ajustar margen según necesites */
+}
+
+.vertice {
+    width: 40px; /* Ancho del círculo del vértice */
+    height: 40px; /* Altura del círculo del vértice */
+    border-radius: 50%; /* Forma circular */
+    background-color: #4CAF50; /* Color de fondo del vértice */
+    text-align: center;
+    line-height: 40px; /* Centrar texto verticalmente */
+    position: absolute;
+    font-size: 14px;
+    color: #fff; /* Color del texto */
+}

@@ -113,5 +113,44 @@ namespace Grafo
                 lblMensaje.Text=$"Error: {ex.Message}";
             }
         }
+
+        protected void btnDibujarGrafo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PanelGrafo.Controls.Clear(); // Limpiar el panel antes de dibujar de nuevo
+
+                string[] vertices = grafo1.MostrarVertices();
+
+                // Calcular posiciones para dibujar vértices en círculo
+                int radio = 250; // Radio del círculo
+                int centerX = (int)(PanelGrafo.Width.Value / 2); // Obtener el ancho del panel en píxeles
+                int centerY = (int)(PanelGrafo.Height.Value / 2); // Obtener el alto del panel en píxeles
+                int numVertices = vertices.Length;
+                double angleIncrement = 2 * Math.PI / numVertices;
+
+                for (int i = 0; i < numVertices; i++)
+                {
+                    // Calcular posición del vértice
+                    int x = (int)(centerX + radio * Math.Cos(i * angleIncrement));
+                    int y = (int)(centerY + radio * Math.Sin(i * angleIncrement));
+
+                    // Crear etiqueta HTML para el vértice
+                    Label vertice = new Label();
+                    vertice.CssClass = "vertice";
+                    vertice.Text = vertices[i];
+                    vertice.ToolTip = "Vértice " + vertices[i];
+                    vertice.Style.Add("left", x + "px");
+                    vertice.Style.Add("top", y + "px");
+
+                    // Agregar el vértice al panel
+                    PanelGrafo.Controls.Add(vertice);
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMensaje.Text = "Error al dibujar el grafo: " + ex.Message;
+            }
+        }
     }
 }
